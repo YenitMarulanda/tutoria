@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Domingo_Reto3.Reto3;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,8 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "bike")
-public class Bike implements Serializable{
+@Table(name = "machine")
+public class Machine implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,15 +28,15 @@ public class Bike implements Serializable{
     
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("bikes")
+    @JsonIgnoreProperties("machines")
     private Categoria category;
 
-     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "bike")
-    @JsonIgnoreProperties({"bike", "client"})
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "machine")
+    @JsonIgnoreProperties({"machine", "client"})
     private List<Mensaje> messages;
 
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "bike")
-    @JsonIgnoreProperties({"bike", "client"})
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "machine")
+    @JsonIgnoreProperties({"machine", "client"})
     private List<Reservaciones> reservations;
 
     public Integer getId() {
@@ -57,7 +54,7 @@ public class Bike implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public String getBrand() {
         return brand;
     }
@@ -73,7 +70,7 @@ public class Bike implements Serializable{
     public void setYear(Integer year) {
         this.year = year;
     }
-
+    
     public String getDescription() {
         return description;
     }
@@ -81,7 +78,7 @@ public class Bike implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
-
+    
     public Categoria getCategory() {
         return category;
     }
@@ -89,7 +86,7 @@ public class Bike implements Serializable{
     public void setCategory(Categoria category) {
         this.category = category;
     }
-
+    
     public List<Mensaje> getMessages() {
         return messages;
     }

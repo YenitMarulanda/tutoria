@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Domingo_Reto3.Reto3;
 
@@ -20,41 +21,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author USUARIO
- */
 @RestController
-@RequestMapping("/api/Bike")
+@RequestMapping("/api/Score")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
-
-public class ControladorBike {
-     @Autowired
-    private ServiciosBike servicio;
+public class ControladorCalificacion {
+   @Autowired
+    private ServiciosCalificacion servico;
     @GetMapping("/all")
-    public List<Bike> getBikes(){
-        return servicio.getAll();
+    public List<Calificacion> getScore(){
+        return servico.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Bike> getBike(@PathVariable("id") int bikeId) {
-        return servicio.getBike(bikeId);
+    public Optional<Calificacion> getScore(@PathVariable("id") int scoreId) {
+        return servico.getScore(scoreId);
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Bike save(@RequestBody Bike bike) {
-        return servicio.save(bike);
+    public Calificacion save(@RequestBody Calificacion score) {
+        return servico.save(score);
     }
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Bike update(@RequestBody Bike bike) {
-        return servicio.update(bike);
+    public Calificacion update(@RequestBody Calificacion score) {
+        return servico.update(score);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int bikeId) {
-        return servicio.deleteBike(bikeId);
+    public boolean delete(@PathVariable("id") int scoreId) {
+        return servico.deleteScore(scoreId);
     } 
 }

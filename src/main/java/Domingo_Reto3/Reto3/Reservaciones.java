@@ -1,29 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Domingo_Reto3.Reto3;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author USUARIO
- */
+
 @Entity
 @Table(name = "reservation")
 public class Reservaciones implements Serializable  {
     
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReservation;
     private Date startDate;
@@ -33,14 +31,22 @@ public class Reservaciones implements Serializable  {
     @ManyToOne
     @JoinColumn(name = "id")
     @JsonIgnoreProperties("reservations")
-    private Bike bike;
+    private Machine machine;
 
     @ManyToOne
     @JoinColumn(name = "idClient")
     @JsonIgnoreProperties({"reservations","messages"})
     private Cliente client;
+    
+//    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "reservation")
+//    @JsonIgnoreProperties({"reservation", "machine"})
+//    private List<Calificacion> score;
 
-    private String score; //depende el grupo
+//    private String score; //depende el grupo
+    
+    @OneToOne
+    @JsonIgnoreProperties("reservation")
+    private Calificacion score;
 
     public Integer getIdReservation() {
         return idReservation;
@@ -74,12 +80,12 @@ public class Reservaciones implements Serializable  {
         this.status = status;
     }
 
-    public Bike getBike() {
-        return bike;
+    public Machine getMachine() {
+        return machine;
     }
 
-    public void setBike(Bike bike) {
-        this.bike = bike;
+    public void setMachine(Machine machine) {
+        this.machine = machine;
     }
 
     public Cliente getClient() {
@@ -90,14 +96,13 @@ public class Reservaciones implements Serializable  {
         this.client = client;
     }
 
-    public String getScore() {
+    public Calificacion getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Calificacion score) {
         this.score = score;
     }
-    
-    
-    
+
+   
 }
